@@ -7,8 +7,7 @@ Both compute the same work function, so either produces a valid nonce.
 
 ## Option A — Web app
 
-1. **Connect a wallet** and let the app switch you to Robinhood Chain (`chainId 4663` mainnet /
-   `46630` testnet). `[proven]`
+1. **Connect a wallet** and let the app switch you to Robinhood Chain (`chainId 4663`). `[proven]`
 2. Open **Mine**. The in-browser engine searches nonces in the background. `[proven]`
 3. When a valid nonce is found, the app sends `mine(nonce, useChip)` on your behalf.
 4. Confirm in your wallet. You pay the **current era price**, and (on a full-price mint) receive a card
@@ -52,7 +51,7 @@ There is also a **phone-friendly mining page** for benchmarking your device's ha
 
 | Component | Amount |
 |---|---|
-| Mint price | `currentPrice()` — starts `0.0003 ETH`, +25% per era |
+| Mint price | `currentPrice()` — starts `0.00037 ETH`, +25% per era |
 | Chip discount | −30% if a chip is used |
 | Gas | Network gas, paid in ETH (blocks ~100–250 ms) |
 

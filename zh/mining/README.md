@@ -22,7 +22,7 @@ Gas 只花几厘）。 `[proven]`
 
 ## 核心公式
 
-合约 `ProofOfCard` 按如下公式校验 PoW： `[proven]`
+合约 `SpiritCards` 按如下公式校验 PoW： `[proven]`
 
 ```
 work  = keccak256( abi.encodePacked(chainId, address(core), miner, nonce) )
@@ -33,8 +33,8 @@ work  = keccak256( abi.encodePacked(chainId, address(core), miner, nonce) )
 
 | 项 | 含义 |
 |---|---|
-| `chainId` | 网络标识（主网 `4663` / 测试网 `46630`） |
-| `address(core)` | `ProofOfCard` 合约地址 |
+| `chainId` | 网络标识（当前测试网 `46630`；主网目标 `4663`） |
+| `address(core)` | `SpiritCards` 合约地址 |
 | `miner` | 玩家钱包地址 |
 | `nonce` | 设备搜索出来的数字 |
 | `leadingZeroBits` | 哈希**前导零比特**的个数 |
@@ -92,12 +92,12 @@ requiredBits = baseBits + floor( era × bitsStepX100 / 100 )
 
 | 参数 | 默认值 | 含义 |
 |---|---|---|
-| `eraPrice` | **0.0003 ETH** | 起始纪元价格（ETH≈$3000 时 ≈$1） `[assumed]` |
+| `eraPrice` | **0.00037 ETH** | 起始纪元价格（ETH≈$3000 时 ≈$1.11） `[assumed]` |
 | `priceStepBps` | **2500** | 每纪元 +25% |
 | `eraSize` | **1111 张** | 一个价格纪元包含多少张卡 |
 | `maxSupply` | **8888** | 最终发行量 |
 
-`maxSupply = 8888`、`eraSize = 1111` → 共 **8 个价格纪元**。价格从第一纪元约 $1 一路温和上行。
+`maxSupply = 8888`、`eraSize = 1111` → 共 **8 个价格纪元**。价格从第一纪元约 $1.11 一路温和上行。
 完整价格阶梯见 [价格与纪元](../economy/price-and-eras.md)。 `[assumed — 价格数值可由 Config 调整]`
 
 ---
@@ -132,7 +132,7 @@ requiredBits = baseBits + floor( era × bitsStepX100 / 100 )
 | `bitsStepX100` | 33 |
 | `mineCooldown` | 45 秒 |
 | `epochCap` / `epochLength` | 1000 / 3600 秒 |
-| `eraPrice` | 0.0003 ETH |
+| `eraPrice` | 0.00037 ETH |
 | `priceStepBps` | 2500（+25%） |
 | `eraSize` | 1111 |
 | `chipDiscountBps` | 3000（−30%） |

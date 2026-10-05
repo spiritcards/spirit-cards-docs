@@ -9,7 +9,7 @@ royalty.
 ## The split
 
 ```solidity
-// ProofOfCard.sol
+// SpiritCards.sol
 function _split(uint256 amount, address payer) internal {
     uint256 toReferral = (amount * config.referralBps()) / 10000; // 10%
     uint256 toPool     = (amount * config.poolBps())     / 10000; // 60%
@@ -36,9 +36,9 @@ function _split(uint256 amount, address payer) internal {
 |---|---|---|
 | Mine (mint price) | `mine()` → `_split(due, miner)` | Yes |
 | Merge fee | `mergeBurn()` → `_split(mergeFee, you)` | Yes |
-| Pack purchase | `Packs.buyPack()` → `poc.collectRevenue{value}(buyer)` | Yes |
+| Pack purchase | `Packs.buyPack()` → `spc.collectRevenue{value}(buyer)` | Yes |
 | PvP rake | `Battle._payRake()` | **No** — split 70% treasury / 30% pool (see below) |
-| External to pool | `ProofOfCard.addToPool()` | Feeds pool directly |
+| External to pool | `SpiritCards.addToPool()` | Feeds pool directly |
 
 `[proven]`
 
@@ -69,18 +69,18 @@ So of the 10% fund: **3% → master ref, 7% → the payer's own referrer.** `[pr
 
 > [!NOTE]
 > If `masterRef` is not set to an address, the master cut is skipped and the referrer receives the
-> **entire 10%**. On the testnet rehearsal the master ref is the deployer. `[proven]`
+> **entire 10%**. On the current deployment the master ref is the deployer. `[proven]`
 
 ### Illustration
 
-A player pays a `0.0003 ETH` mint fee:
+A player pays a `0.00037 ETH` mint fee:
 
 | Recipient | Calculation | Amount |
 |---|---|---|
-| Master ref | 3% of gross | 0.000009 ETH |
-| Personal referrer | 7% of gross | 0.000021 ETH |
-| Staker pool | 60% | 0.000180 ETH |
-| Treasury | 30% | 0.000090 ETH |
+| Master ref | 3% of gross | 0.0000111 ETH |
+| Personal referrer | 7% of gross | 0.0000259 ETH |
+| Staker pool | 60% | 0.000222 ETH |
+| Treasury | 30% | 0.000111 ETH |
 
 `[assumed]` — arithmetic follows directly from the defaults above.
 
@@ -150,7 +150,7 @@ Protections:
 
 ## Secondary-market royalty (ERC-2981)
 
-`ProofOfCard` implements **ERC-2981**. When a card is resold on a marketplace that honours the
+`SpiritCards` implements **ERC-2981**. When a card is resold on a marketplace that honours the
 standard (e.g. OpenSea), a royalty is paid to the treasury: `[proven]`
 
 ```solidity
@@ -189,11 +189,11 @@ See the [Legal disclaimer](../project/legal-disclaimer.md).
 ```solidity
 config.poolBps()  config.referralBps()  config.houseBps()  config.reserveBps()
 config.masterRefBps()
-poc.referrerOf(user)
-poc.referralEarned(user)
-poc.accruedReferral()  poc.referralOutstanding()
-poc.accruedPool()  poc.accruedHouse()  poc.accruedReserve()
-poc.masterRef()
+spc.referrerOf(user)
+spc.referralEarned(user)
+spc.accruedReferral()  spc.referralOutstanding()
+spc.accruedPool()  spc.accruedHouse()  spc.accruedReserve()
+spc.masterRef()
 ```
 
 `[proven]`

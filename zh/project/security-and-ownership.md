@@ -38,10 +38,10 @@
 
 ## 所有权移交（Handover）
 
-当前状态（测试网 t7）：`treasury` = **Safe**，`ChipToken.owner` = **Safe**，`Points.owner` =
-`Config.owner`；而 `Config` 所有者暂为 **deployer**（测试期）。 `[proven]`
+当前状态（t8）：`treasury` = **Safe**，`ChipToken.owner` = **Safe**，`Points.owner` =
+`Config.owner`；而 `Config` 所有者暂为 **deployer**。 `[proven]`
 
-**计划：** 主网部署后，将 **`Config` 所有者**通过**两步流程**移交给 **Safe 2-of-3**。由于
+**计划：** 将 **`Config` 所有者**通过**两步流程**移交给 **Safe 2-of-3**。由于
 `Points.owner` 等模块**跟随** `Config.owner()`，管理权会自动迁到 Safe，**不会留下「前任所有者」**。 `[planned]`
 
 建议为 `Config` 增加 **timelock**（参数应用延迟）——这样变更可见、且非瞬时生效。 `[planned]`
@@ -52,7 +52,7 @@
 
 - 已完成内部**合约安全评审**，据此修复了若干问题（筹码消耗、`burned` 标志、熔炼不变量、
   `mergeFailBps`、`Points` 跟随 `Config` 等）。 `[proven]`
-- **测试：400/400**（fuzz + 不变量 + 边界情形 + 质押-战斗 + `AuditFixes`）。 `[proven]`
+- **测试：418/418**（fuzz + 不变量 + 边界情形 + 质押-战斗 + `AuditFixes`）。 `[proven]`
 - 当前阶段**未计划付费外部审计**（所有者决定）；策略以 Safe + 测试为主。 `[proven]`
 - **内部审计未发现 critical / high 级别问题。** `[proven]`
 
@@ -84,7 +84,7 @@
 
 - 所有者 = Safe 2-of-3，两步转移；核心可调；关键函数有重入保护与暂停开关。 `[proven]`
 - 后置种子防研磨；战斗随机源接受方签名时未知。 `[proven]`
-- 内部评审无 critical / high；测试 400/400；暂无付费外部审计。 `[proven]`
+- 内部评审无 critical / high；测试 418/418；暂无付费外部审计。 `[proven]`
 - **任何审计都不消除风险**——这是实验。 `[proven]`
 
 ---

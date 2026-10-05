@@ -53,7 +53,7 @@ function _loseLife(uint256 card, address owner, bool fromVault) internal {
 
 When a card hits 0 lives: `[proven]`
 
-- If the dead card was **wallet-owned**: `poc.burnCard(card)` (the Battle contract holds it in escrow
+- If the dead card was **wallet-owned**: `spc.burnCard(card)` (the Battle contract holds it in escrow
   and burns it).
 - If the dead card was **staked**: `vault.killInBattle(card)` — which settles the staker's pending
   rewards, clears the stake, and burns the card.
@@ -67,14 +67,14 @@ Cards move through the duel in one of two custody modes. The helper functions ma
 
 ```solidity
 function _escrow(uint256 card, address who) internal returns (bool fromVault) {
-    if (poc.ownerOf(card) == who) { poc.transferFrom(who, address(this), card); return false; }
+    if (spc.ownerOf(card) == who) { spc.transferFrom(who, address(this), card); return false; }
     if (_stakedBy(card, who))     { vault.lockForBattle(card, who);             return true;  }
     revert("NOT_OWNER");
 }
 
 function _release(uint256 card, address holder, bool fromVault) internal {
     if (fromVault) vault.unlockFromBattle(card);              // stays staked
-    else           poc.transferFrom(address(this), holder, card);
+    else           spc.transferFrom(address(this), holder, card);
 }
 ```
 
@@ -84,7 +84,7 @@ function _release(uint256 card, address holder, bool fromVault) internal {
 |---|---|---|
 | **Escrow** | Transferred to Battle | `vault.lockForBattle` (stays in vault) |
 | **Release (survived)** | Transferred back to owner | `unlockFromBattle` (stays staked) |
-| **Kill (0 lives)** | `poc.burnCard` | `vault.killInBattle` |
+| **Kill (0 lives)** | `spc.burnCard` | `vault.killInBattle` |
 | **NFT approve needed?** | Yes (Battle pulls the card) | **No** — the vault holds custody |
 
 ---
@@ -101,8 +101,8 @@ This is a first-class feature, not an edge case: `[proven]`
 - On death, `killInBattle` pays the staker's **pending rewards** and closes the position.
 
 > [!TIP]
-> This is why staking and battling are not mutually exclusive: you can lock a card for yield and still
-> send it into duels. Just remember a loss costs a life.
+> This is why staking and battling are not mutually exclusive: you can lock a card for a share of the
+> pool and still send it into duels. Just remember a loss costs a life.
 
 See [Staking & rewards](../economy/staking-and-rewards.md) for the vault side.
 
@@ -135,7 +135,7 @@ function _payRake(uint256 rake) internal {
     if (rake == 0) return;
     uint256 toPool  = (rake * config.rakeToPoolBps()) / 10000; // 30%
     uint256 toHouse = rake - toPool;                           // 70%
-    if (toPool  > 0) poc.addToPool{value: toPool}();
+    if (toPool  > 0) spc.addToPool{value: toPool}();
     if (toHouse > 0) payable(config.treasury()).call{value: toHouse}("");
 }
 ```

@@ -10,9 +10,8 @@
 
 | 渠道 | 地址 | 说明 |
 |---|---|---|
-| **网站（测试网）** | `quiet-atlas-2049.vercel.app` | 当前测试网前端 |
-| **品牌域名（目标）** | `spiritcards.fun` | 目标正式域名 |
-| **X（Twitter）** | `https://x.com/spirit_cards` | 公告与更新 |
+| **网站** | `https://spiritcards.fun` | 正式站点（LIVE，2026-10-05 起启用 TLS） |
+| **X（Twitter）** | `https://x.com/spirit_card` | 公告与更新 |
 | **Telegram** | `https://t.me/spirit_cards_game` | 社区与客服 |
 | **GitHub** | `https://github.com/spiritcards` | 代码与文档 |
 
@@ -20,7 +19,7 @@
 
 ## 使用提示
 
-- **网络**：连接时请切到 **Robinhood Chain**（测试网 `46630` / 主网 `4663`），Gas 用 **ETH**。
+- **网络**：连接时请切到 **Robinhood Chain**（当前部署在测试网 `chainId 46630`；主网 `4663` 为目标，尚未部署），Gas 用 **ETH**。
 - **网站会自动提示切换网络**。 `[proven]`
 - **地址的唯一权威来源**是仓库 `ops/ADDRESSES.md`；本 GitBook 中的地址是其快照。见
   [合约与地址](contracts-and-addresses.md)。

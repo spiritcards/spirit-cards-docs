@@ -1,9 +1,9 @@
-# Spirit Cards（链上名 Proof of Card / POC）
+# Spirit Cards（代币符号 SPC）
 
 > **带属性的灵兽收藏卡：不能买，只能挖。**
 > 真实的 **PoW 挖矿**、从链上种子确定性推出的稀有度、押注式决斗、按权重分红的质押，以及活跃度积分。
 >
-> 网络：**Robinhood Chain**（Arbitrum Orbit L2；主网 `chainId 4663`，测试网 `46630`，Gas 用 **ETH**）。
+> 网络：**Robinhood Chain**（Arbitrum Orbit L2）。当前线上部署在**测试网 `chainId 46630`**（演练栈 **t8**，2026-10-04），Gas 用 **ETH**；主网 `4663` 为目标，**尚未部署**。
 > 面向：**中文加密社区**（微信 / Telegram / X）。
 >
 > 本文档中的每个观点都带标签：`[proven]`（已在代码/链上验证）、`[assumed]`（推断/估计）、
@@ -13,7 +13,7 @@
 
 ## 这是什么
 
-**Spirit Cards**（链上名 `Proof of Card`，代号 `POC`）是一款「卡牌收藏 + 对战」游戏。卡牌不是
+**Spirit Cards**（代币符号 `SPC`；链上 `name() = "Spirit Cards"`，`symbol() = "SPC"`）是一款「卡牌收藏 + 对战」游戏。卡牌不是
 在商店里按固定价格出售，而是**靠挖矿获得**：你的设备不断尝试一个数字（`nonce`），直到算出的
 哈希满足难度门槛（前导零比特数足够）——这就是货真价实的工作量证明（PoW），和比特币同理，
 但在 Robinhood Chain 上只需几秒和几厘 Gas。每张卡都有**属性（元素）、稀有度和战斗数值**，
@@ -28,13 +28,14 @@
 | 项目 | 说明 |
 |---|---|
 | 链 | Robinhood Chain（Arbitrum Orbit L2） |
-| 主网 / 测试网 chainId | `4663` / `46630` |
+| 测试网 chainId（当前部署） | `46630` |
+| 主网 chainId（目标，未部署） | `4663` |
 | Gas 代币 | **ETH** |
 | 出块速度 | 约 100–250 ms `[assumed — 来自实测笔记]` |
 | 总发行量 | **8888**（`maxSupply`，最终上限，只减不增） |
 | 物种 | **16**（8 通用 + 8 龙） |
 | 卡牌种子 | `keccak256(block.prevrandao, miner, nonce, id)` |
-| 起始铸造价 | **0.0003 ETH**（`eraPrice`，≈ $1） `[assumed]` |
+| 起始铸造价 | **0.00037 ETH**（`eraPrice`，≈ $1.11） `[assumed]` |
 | 价格增幅 | 每个价格纪元 **+25%**（`priceStepBps = 2500`） |
 | 每个价格纪元规模 | **1111** 张（`eraSize`）→ 共 **8 个纪元** |
 | 起始难度 | **20 位**前导零（`baseBits`） |

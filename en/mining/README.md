@@ -18,13 +18,13 @@ work = keccak256(abi.encodePacked(chainId, address(core), miner, nonce))
 valid  ⇔  leadingZeroBits(work) ≥ requiredBits()
 ```
 
-- `chainId` — `4663` mainnet / `46630` testnet (prevents cross-chain replay).
-- `address(core)` — the `ProofOfCard` contract address.
+- `chainId` — `4663` (prevents cross-chain replay).
+- `address(core)` — the `SpiritCards` contract address.
 - `miner` — your wallet address.
 - `nonce` — the number you search for; **one-time use per (miner, nonce)**.
 - `requiredBits()` — the current difficulty in whole bits.
 
-`[proven]` — this is exactly the check in `ProofOfCard.mine()`.
+`[proven]` — this is exactly the check in `SpiritCards.mine()`.
 
 At difficulty **20 bits**, the expected number of hashes to find a valid nonce is `2²⁰ ≈ 1,048,576`.
 That is seconds, not hours. `[proven]`

@@ -2,7 +2,7 @@
 
 ## 概览
 
-* [Spirit Cards（Proof of Card / POC）](README.md)
+* [Spirit Cards（SPC）](README.md)
 
 ## 简介
 

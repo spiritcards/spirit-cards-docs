@@ -8,7 +8,7 @@ block of **1111 cards**. There are **8 eras**, covering the whole 8888 base supp
 ## The formula
 
 ```solidity
-// ProofOfCard.sol
+// SpiritCards.sol
 function currentPrice() public view returns (uint256) {
     uint256 era = paidMinted / config.eraSize();
     uint256 p = config.eraPrice();
@@ -21,7 +21,7 @@ function currentPrice() public view returns (uint256) {
 
 | Parameter | Value | Meaning |
 |---|---|---|
-| `eraPrice` | **0.0003 ETH** | Starting price (≈ $1 at ETH ≈ $3000) |
+| `eraPrice` | **0.00037 ETH** | Starting price (≈ $1.11 at ETH ≈ $3000) |
 | `priceStepBps` | **2500** | +25% per era |
 | `eraSize` | **1111** | Cards per era |
 
@@ -37,14 +37,14 @@ The era is `floor(paidMinted / 1111)`. Below, USD is shown at an illustrative **
 
 | Era | Card range (paid index) | Price (ETH) | Price (≈ USD) | Δ vs. previous |
 |---|---|---|---|---|
-| **0** | 1 – 1111 | `0.00030000` | ~$0.90 | — |
-| **1** | 1112 – 2222 | `0.00037500` | ~$1.13 | +25% |
-| **2** | 2223 – 3333 | `0.00046875` | ~$1.41 | +25% |
-| **3** | 3334 – 4444 | `0.00058594` | ~$1.76 | +25% |
-| **4** | 4445 – 5555 | `0.00073242` | ~$2.20 | +25% |
-| **5** | 5556 – 6666 | `0.00091553` | ~$2.75 | +25% |
-| **6** | 6667 – 7777 | `0.00114441` | ~$3.43 | +25% |
-| **7** | 7778 – 8888 | `0.00143051` | ~$4.29 | +25% |
+| **0** | 1 – 1111 | `0.00037000` | ~$1.11 | — |
+| **1** | 1112 – 2222 | `0.00046250` | ~$1.39 | +25% |
+| **2** | 2223 – 3333 | `0.00057813` | ~$1.73 | +25% |
+| **3** | 3334 – 4444 | `0.00072266` | ~$2.17 | +25% |
+| **4** | 4445 – 5555 | `0.00090332` | ~$2.71 | +25% |
+| **5** | 5556 – 6666 | `0.00112915` | ~$3.39 | +25% |
+| **6** | 6667 – 7777 | `0.00141144` | ~$4.23 | +25% |
+| **7** | 7778 – 8888 | `0.00176430` | ~$5.29 | +25% |
 
 Price is **monotonic, non-decreasing** and independent of demand — a fixed schedule, not an auction.
 `[proven]` for the ETH numbers; `[assumed]` for the USD column (it moves with the ETH price).
@@ -61,20 +61,20 @@ Summing `1111 × price_e` across eras 0–7:
 
 | Era | Cards | Era total (ETH) |
 |---|---|---|
-| 0 | 1111 | 0.33330 |
-| 1 | 1111 | 0.41663 |
-| 2 | 1111 | 0.52078 |
-| 3 | 1111 | 0.65098 |
-| 4 | 1111 | 0.81372 |
-| 5 | 1111 | 1.01715 |
-| 6 | 1111 | 1.27144 |
-| 7 | 1111 | 1.58929 |
-| **Total** | **8888** | **≈ 6.61 ETH** |
+| 0 | 1111 | 0.41107 |
+| 1 | 1111 | 0.51384 |
+| 2 | 1111 | 0.64230 |
+| 3 | 1111 | 0.80287 |
+| 4 | 1111 | 1.00359 |
+| 5 | 1111 | 1.25449 |
+| 6 | 1111 | 1.56811 |
+| 7 | 1111 | 1.96013 |
+| **Total** | **8888** | **≈ 8.16 ETH** |
 
 `[proven]` for the arithmetic (it follows from the formula); the total assumes all cards are mined
 at list price, ignoring chip discounts and packs.
 
-In USD: **≈ $19,800** at ETH ≈ $3000. `[assumed]` — purely ETH-price dependent.
+In USD: **≈ $24,500** at ETH ≈ $3000. `[assumed]` — purely ETH-price dependent.
 
 ---
 
@@ -96,15 +96,15 @@ The same era index drives **both** the price and the mining **difficulty**. As p
 
 ```
 era = paidMinted / eraSize
-price(era) = 0.0003 × 1.25^era
+price(era) = 0.00037 × 1.25^era
 requiredBits(era) = 20 + floor(era × 0.33)
 ```
 
 | Era | Price (ETH) | Difficulty (bits) |
 |---|---|---|
-| 0–3 | 0.00030 → 0.00059 | 20 |
-| 4–6 | 0.00073 → 0.00114 | 21 |
-| 7 | 0.00143 | 22 |
+| 0–3 | 0.00037 → 0.00072 | 20 |
+| 4–6 | 0.00090 → 0.00141 | 21 |
+| 7 | 0.00176 | 22 |
 
 `[proven]`
 
@@ -123,8 +123,8 @@ spend a chip. See [How to mint](../mining/how-to-mint.md).
 ## Reading it on-chain
 
 ```solidity
-poc.currentPrice()   // price for the current era
-poc.paidMinted()     // cards minted (price-indexed)
+spc.currentPrice()   // price for the current era
+spc.paidMinted()     // cards minted (price-indexed)
 config.eraPrice()    // start price
 config.priceStepBps()// step in bps
 config.eraSize()     // cards per era

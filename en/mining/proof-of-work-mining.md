@@ -1,7 +1,7 @@
 # Proof-of-work mining
 
 This page is the exact technical description of how a Spirit Card is mined and minted. Everything
-here is verifiable in `ProofOfCard.sol`.
+here is verifiable in `SpiritCards.sol`.
 
 ---
 
@@ -16,11 +16,11 @@ function workFor(address miner, uint256 nonce) public view returns (bytes32) {
 The work for a given `(miner, nonce)` is the `keccak256` of the packed bytes:
 
 ```
-chainId (uint256) ‖ ProofOfCard address (20 bytes) ‖ miner (20 bytes) ‖ nonce (uint256)
+chainId (uint256) ‖ SpiritCards address (20 bytes) ‖ miner (20 bytes) ‖ nonce (uint256)
 ```
 
-Because `chainId` and the contract address are baked in, a nonce that is valid on mainnet is **not**
-valid on testnet, and a nonce for one contract cannot be replayed on another. `[proven]`
+Because `chainId` and the contract address are baked in, a nonce valid for one contract cannot be
+replayed on another. `[proven]`
 
 ---
 
@@ -143,7 +143,7 @@ event Mined(address indexed miner, uint256 indexed tokenId, uint256 nonce,
 Given a `Mined` event you can fully re-derive the card:
 
 ```
-work  = keccak256(chainId ‖ ProofOfCard ‖ miner ‖ nonce)   // must equal event.work
+work  = keccak256(chainId ‖ SpiritCards ‖ miner ‖ nonce)   // must equal event.work
 seed  = keccak256(block.prevrandao_of_mint_block ‖ miner ‖ nonce ‖ tokenId)
 stats = profileOf(tokenId)                                 // reads seedOf on-chain
 ```

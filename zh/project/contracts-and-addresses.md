@@ -1,8 +1,8 @@
 # 合约与地址
 
 > [!NOTE]
-> **地址的唯一权威来源**是仓库中的 `ops/ADDRESSES.md`。本页是测试网 **t7** 的**快照**，
-> 发布前请与 `ops/ADDRESSES.md` 核对。测试网地址会随重部署变化。
+> **地址的唯一权威来源**是仓库中的 `ops/ADDRESSES.md`。本页是 **t8** 的**快照**，
+> 发布前请与 `ops/ADDRESSES.md` 核对。已部署地址以仓库 `ops/ADDRESSES.md` 为准。
 
 ---
 
@@ -11,10 +11,10 @@
 | 参数 | 值 |
 |---|---|
 | 类型 | Arbitrum Orbit L2 |
-| **主网 chainId** | **4663** |
-| **测试网 chainId** | **46630** |
+| **测试网 chainId（当前部署）** | **46630** |
+| **主网 chainId（目标，未部署）** | **4663** |
 | 原生 Gas | **ETH** |
-| RPC（主网） | `https://rpc.mainnet.chain.robinhood.com` |
+| RPC | 以 `ops/ADDRESSES.md` / 官方公告为准 |
 | 出块时间 | 约 100–250 ms `[assumed — 来自实测笔记]` |
 
 ---
@@ -26,7 +26,7 @@
 | 合约 | 角色 |
 |---|---|
 | `Config` | 参数中心（价格、难度、费用、分配、抽水、积分等旋钮） |
-| `ProofOfCard` | 主 NFT：ERC-721（精简）+ ERC-2981 版税；PoW 挖矿与种子推导 |
+| `SpiritCards` | 主 NFT：ERC-721（精简）+ ERC-2981 版税；PoW 挖矿与种子推导 |
 | `ChipToken` | 筹码：ERC-1155（−30% 折扣券） |
 | `StakeVault` | 质押金库（6 档权重、分红、质押卡参战） |
 | `Battle` | 决斗托管与结算（createDuel / acceptDuel / cancelDuel） |
@@ -35,23 +35,27 @@
 
 ---
 
-## 测试网部署（Robinhood Chain 46630）
+## 部署（Robinhood Chain）
 
-部署于 **2026-09-29**（**redeploy t7**：Battle v2 = 元素 + 技能 + 结果浮动；**上级推荐 3% +
+部署于 **2026-10-04**（**redeploy t8**，**测试网 `chainId 46630`**；本次为**链上改名（rebrand）后的演练部署**：ERC-721 `name() = "Spirit Cards"`、`symbol() = "SPC"`，合约名 `SpiritCards`；Battle v2 = 元素 + 技能 + 结果浮动；**上级推荐 3% +
 邀请人 7%**；**PvP 抽水 70% 国库 / 30% 分红池**；**难度 +0.33 位/纪元**；`eraSize = 1111`；
-`masterRef` = deployer（测试期）），由 deployer 部署。**`treasury` = Safe**；`Config` 所有者 =
-deployer（测试期，移交 Safe 为**单独步骤**）。 `[proven]`
+`masterRef` = deployer），由 deployer 部署。**`treasury` = Safe**；`Config` 所有者 =
+deployer（移交 Safe 为**单独步骤**）。 `[proven]`
 
 | 合约 / 角色 | 地址 |
 |---|---|
 | **Safe 2-of-3** | `0x7AC43F96021C50dC057F2F5f6fc5bAa02D4aD912` |
-| Config | `0x4ac4f6850D7b25688636d1A2a903721cDE8Ef72d` |
-| ChipToken（ERC-1155） | `0x7b8cbA0FA17b8d5982B6e33EB4d31fb5115527c7` |
-| ProofOfCard | `0xeD628d2c353cB2071DD243E067C94516F38572d9` |
-| StakeVault | `0xf41AcCFcC3A1A3225133F9C261b76Ca4a7651B54` |
-| Battle | `0xAe8bDD77F59d3684A25Eb21ab2dAe980aa1710Bb` |
-| Points | `0x6327Ed72071B223f786Cc5BF053516F667F97119` |
-| Packs | `0x521eE1759F1842Cd81962c068Ec5e9eB708FDf2A` |
+| Config | `0x09a24a40210BCed6e62794862175390c229Aa9b1` |
+| ChipToken（ERC-1155） | `0x596FA37213781f08fD33ad5c0B7A79684852Ed01` |
+| SpiritCards | `0xAb4cCECaC61Be7bEc6389FF3A215E804E1A1cD46` |
+| StakeVault | `0x877E2df6691bCb1f4EECf999444B08711c89e0f8` |
+| Battle | `0x72382D2e24bbEB1F89DcCF4aB8F094a7b56f54e6` |
+| Points | `0x302Af8502FCa4123A715b91D3f913EAa240eFe49` |
+| Packs | `0x3FDF852F2E0a0c3E934Bd03A00392f657ceb9Bb0` |
+
+> [!WARNING]
+> 上表地址 = **当前演练（rehearsal）部署**，位于**测试网 `chainId 46630`**（**t8**，2026-10-04）。
+> **主网 `4663` 尚未部署，主网地址尚未公布**。主网地址公布后，以仓库 `ops/ADDRESSES.md` 为准。
 
 ---
 
@@ -59,27 +63,27 @@ deployer（测试期，移交 Safe 为**单独步骤**）。 `[proven]`
 
 | 关联 | 值 |
 |---|---|
-| `ProofOfCard.vault()` | = StakeVault |
+| `SpiritCards.vault()` | = StakeVault |
 | `Battle.vault()` | = StakeVault |
 | `StakeVault.battle()` | = Battle |
 | `ChipToken.owner()` | = Safe |
-| `ChipToken.minter()` | = ProofOfCard |
+| `ChipToken.minter()` | = SpiritCards |
 | `Points.owner()` | = `Config.owner()` |
 | `Config.treasury()` | = Safe |
-| `Packs.poc()` | = ProofOfCard |
-| `ProofOfCard.packMinter()` | = Packs |
-| `ProofOfCard.masterRef()` | = deployer（测试期） |
+| `Packs.poc()` | = SpiritCards |
+| `SpiritCards.packMinter()` | = Packs |
+| `SpiritCards.masterRef()` | = deployer |
 
 ---
 
-## 测试网参数（t7）[proven]
+## 参数（t8）[proven]
 
 | 键 | 值 |
 |---|---|
 | `eraSize` | 1111 |
 | `baseBits` | 20 |
 | `bitsStepX100` | 33 |
-| `eraPrice` | 0.0003 ETH |
+| `eraPrice` | 0.00037 ETH |
 | `priceStepBps` | 2500 |
 | `maxSupply` | 8888 |
 | 分配 | 6000 / 1000 / 3000 / 0 |
@@ -91,21 +95,21 @@ deployer（测试期，移交 Safe 为**单独步骤**）。 `[proven]`
 | `lives` | 3 |
 
 > [!NOTE]
-> 更早的测试网部署（t6 / t5 / t4 / t3 / t2）地址存放在仓库的 git 历史中。本页只列出最新 t7。
+> 更早的部署（t7 / t6 / t5 / t4 / t3 / t2）地址存放在仓库的 git 历史中。本页只列出最新 t8。
 
 ---
 
-## 测试网钱包 [proven]
+## 项目钱包 [proven]
 
 | 角色 | 地址 |
 |---|---|
-| testnet-deployer | `0x280d1C2B20728F43d440A7449113283aD224207A` |
-| testnet-signer-1 | `0xfe8FEDA23C5cB174f4F2D7DA09053d14eE963032` |
-| testnet-signer-2 | `0x82a7b043eaaDB46df247869987f1A0E1D6dC752C` |
-| testnet-signer-3 | `0xbc99Ead2eC29ef7bbb0098c63278fF06c6242515` |
+| deployer | `0x280d1C2B20728F43d440A7449113283aD224207A` |
+| signer-1 | `0xfe8FEDA23C5cB174f4F2D7DA09053d14eE963032` |
+| signer-2 | `0x82a7b043eaaDB46df247869987f1A0E1D6dC752C` |
+| signer-3 | `0xbc99Ead2eC29ef7bbb0098c63278fF06c6242515` |
 
 > [!WARNING]
-> **官方地址 ≠ 团队 / 个人地址。** 永远不要把两者混淆。主网钱包与 Safe 将由同一脚本
+> **官方地址 ≠ 团队 / 个人地址。** 永远不要把两者混淆。主网钱包与 Safe 由同一脚本
 > （`--chain mainnet`）单独生成，地址**不同**。
 
 ---

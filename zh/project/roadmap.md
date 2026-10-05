@@ -10,7 +10,7 @@
 
 | 项目 | 状态 |
 |---|---|
-| 核心合约：`Config` / `ProofOfCard` / `ChipToken` / `StakeVault` / `Battle` / `Points` / `Packs` | `[proven]` |
+| 核心合约：`Config` / `SpiritCards` / `ChipToken` / `StakeVault` / `Battle` / `Points` / `Packs` | `[proven]` |
 | PoW 挖矿（合约校验 + 浏览器 / CLI 挖矿器） | `[proven]` |
 | 后置种子（防预先研磨）与确定性稀有度 | `[proven]` |
 | 16 物种美术 + 种子确定性渲染 | `[proven]` |
@@ -21,8 +21,10 @@
 | 积分与链上排行榜 | `[proven]` |
 | 收入分配（pool 60 / referral 10 / treasury 30 / reserve 0）与推荐（上级 3% + 邀请人 7%） | `[proven]` |
 | `pumpPool()` 免许可注入分红池 | `[proven]` |
-| 内部安全评审 + 400/400 测试 | `[proven]` |
-| 测试网部署 **t7**（Robinhood Chain 46630） | `[proven]` |
+| **链上改名（rebrand）为 Spirit Cards / SPC** | `[proven]` |
+| 官网正式域名 `spiritcards.fun`（LIVE） | `[proven]` |
+| 内部安全评审 + 418/418 测试 | `[proven]` |
+| 部署 **t8**（Robinhood Chain 测试网 `46630` 演练，2026-10-04） | `[proven]` |
 
 ---
 
@@ -32,14 +34,13 @@
 |---|---|
 | `Config` 所有权移交 **Safe 2-of-3**（两步流程） | `[planned]` |
 | 为 `Config` 增加 **timelock**（参数变更延迟） | `[planned]` |
-| 主网部署（`chainId 4663`），主网 Safe 与钱包 | `[planned]` |
 | 「一键」内嵌钱包（Face ID / 邮箱，Privy） | `[planned]` |
+| **主网部署 t9**（`chainId 4663`；主网地址公布） | `[planned]` |
 | **赛季**（链下窗口 + 皮肤 / 物品奖励，非货币） | `[planned]` |
 | 卡包「开包」动画（打包系统） | `[planned — 已有设计文档]` |
 | 成套（集齐）奖励（皮肤 / 唯一物品，非货币） | `[planned]` |
 | 追卡（chase card）每季 1–2 张 | `[planned]` |
 | 外部合作 / 赞助注入分红池 | `[planned]` |
-| 官网正式域名 `spiritcards.fun` | `[planned]` |
 
 ---
 

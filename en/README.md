@@ -4,8 +4,9 @@
 > Real proof-of-work, deterministic rarity derived from an on-chain seed, escrow duels on a
 > stake, a staking vault that shares a slice of real fees, and an on-chain activity leaderboard.
 >
-> On-chain name: **Proof of Card** · ticker: **POC**
-> Network: **Robinhood Chain** (an Arbitrum Orbit L2; mainnet `chainId 4663`, testnet `46630`, gas in **ETH**).
+> On-chain name: **Spirit Cards** (`SpiritCards`) · ticker: **SPC**
+> Network: **Robinhood Chain** (an Arbitrum Orbit L2; mainnet `chainId 4663`, gas in **ETH**).
+> Current live stack: **t8 rehearsal on testnet `chainId 46630`** (mainnet `4663` pending).
 
 Spirit Cards is a game and an experiment. There is **no token**, no liquidity pool, and no promise
 of profit. Cards are earned by doing work, then traded, merged, wagered, and staked. Everything that
@@ -36,17 +37,16 @@ can go to zero. Points have **no monetary value**.
 |---|---|
 | Chain | Robinhood Chain (Arbitrum Orbit L2) |
 | Mainnet chainId | `4663` |
-| Testnet chainId | `46630` |
 | Gas token | ETH |
 | Block time | ~100–250 ms |
-| On-chain name / ticker | Proof of Card / `POC` |
+| On-chain name / ticker | Spirit Cards / `SPC` |
 | Total supply (base) | **8888** (`maxSupply`) |
 | Species | **16** (8 universal + 8 dragons) |
 | Rarities | 6 — N / R / SR / UR / SSR / Prism |
 | Elements | 4 — Ember, Stone, Gale, Tide |
 | Skills | 6 — none, Crit, Shield, Pierce, Precision, Vigor |
 | Mining difficulty | `baseBits = 20`, +0.33 bit per price-era |
-| Starting price | `0.0003 ETH` (≈ $1 at ETH ≈ $3000) |
+| Starting price | `0.00037 ETH` (≈ $1 at ETH ≈ $3000) |
 | Price step | +25% per era (`priceStepBps = 2500`) |
 | Era size | **1111** cards → **8 eras** (8 × 1111 = 8888) |
 | Merge | 2 → 1, fee `0.00002 ETH`, 7% chance of a "dud" |

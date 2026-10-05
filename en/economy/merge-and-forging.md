@@ -116,9 +116,9 @@ contract stores only the seed. That means: `[proven]`
 ## Reading it on-chain
 
 ```solidity
-poc.seedOf(a)      // input card A seed
-poc.seedOf(b)      // input card B seed
-poc.forged()       // total forged children
+spc.seedOf(a)      // input card A seed
+spc.seedOf(b)      // input card B seed
+spc.forged()       // total forged children
 // Merged(a, b, child, fee)   child == 0  →  dud
 ```
 

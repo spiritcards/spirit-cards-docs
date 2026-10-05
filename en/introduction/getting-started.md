@@ -11,12 +11,13 @@ with it." It takes about ten minutes of reading and one transaction.
 
 ## 1. Get a wallet and some ETH on Robinhood Chain
 
-Spirit Cards runs on **Robinhood Chain**, an Arbitrum Orbit L2.
+Spirit Cards runs on **Robinhood Chain**, an Arbitrum Orbit L2. The current **t8** rehearsal runs on the
+**testnet** (`chainId 46630`); **mainnet `4663`** is the target, pending deployment (**t9**).
 
 | Network | chainId | Gas token |
 |---|---|---|
-| Mainnet | `4663` | ETH |
-| Testnet | `46630` | ETH (testnet) |
+| Mainnet (target, pending) | `4663` | ETH |
+| Testnet (current rehearsal, t8) | `46630` | ETH |
 
 You need an EVM wallet (browser or mobile) and a small ETH balance for the **mint price** plus gas.
 Blocks are fast (~100–250 ms), so confirmations feel instant. `[proven]`
@@ -28,13 +29,12 @@ Blocks are fast (~100–250 ms), so confirmations feel instant. `[proven]`
 
 ## 2. Open the web app
 
-The current testnet deployment is at **`quiet-atlas-2049.vercel.app`** (the brand domain
-`spiritcards.fun` is registered). See [Official links](../project/official-links.md).
+The web app is live at **`https://spiritcards.fun`**. See [Official links](../project/official-links.md).
 
 The app has these sections:
 
 ```
-Collection · Mine · Merge · Stake · Battle · Points · Docs · Pool · Profile
+Collection · Mine · Stake · Battle · Merge · Points · Docs (+ Pool & Profile)
 ```
 
 ---
@@ -44,7 +44,7 @@ Collection · Mine · Merge · Stake · Battle · Points · Docs · Pool · Prof
 Mining is a real proof-of-work. The app (or the CLI miner) searches for a `nonce` such that:
 
 ```
-keccak256(chainId ‖ ProofOfCard ‖ yourAddress ‖ nonce)
+keccak256(chainId ‖ SpiritCards ‖ yourAddress ‖ nonce)
 ```
 
 has at least `requiredBits()` leading zero bits. At the starting difficulty that is about
@@ -54,7 +54,7 @@ Steps:
 
 1. Connect your wallet.
 2. Go to **Mine**. The mining engine runs in the background and finds a valid `nonce`. `[proven]`
-3. Send the mint transaction, paying the **current era price** (starts at `0.0003 ETH`).
+3. Send the mint transaction, paying the **current era price** (starts at `0.00037 ETH`).
 4. You receive a card (with a fresh on-chain seed) **and 1 chip**.
 
 A chip is a consumable: it gives you **−30%** on your *next* mint (and is spent when you use it).

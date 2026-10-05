@@ -74,10 +74,10 @@
 
 | 中文 | EN | 含义 |
 |---|---|---|
-| Robinhood 链 | Robinhood Chain | Arbitrum Orbit L2，chainId 4663 / 46630 |
+| Robinhood 链 | Robinhood Chain | Arbitrum Orbit L2；当前部署测试网 chainId 46630（主网 4663 为目标，未部署） |
 | Gas 费 | gas | 网络手续费，以 ETH 计 |
 | 交易市场 | marketplace | OpenSea（二级交易） |
-| 测试网 / 主网 | testnet / mainnet | 演练 / 正式网络 |
+| 主网 | mainnet | 正式网络 |
 | 智能合约 | smart contract | 链上程序 |
 
 ---
@@ -87,7 +87,7 @@
 | 合约 | 作用 |
 |---|---|
 | `Config` | 参数中心 |
-| `ProofOfCard` | 主 NFT（ERC-721 + ERC-2981） |
+| `SpiritCards` | 主 NFT（ERC-721 + ERC-2981） |
 | `ChipToken` | 筹码（ERC-1155） |
 | `StakeVault` | 质押金库 |
 | `Battle` | 决斗 |

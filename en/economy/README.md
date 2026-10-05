@@ -53,7 +53,7 @@ The split is tunable (must sum to 10000 bps). Details, plus the referral mechani
 
 | Page | Covers |
 |---|---|
-| **[Price & eras](price-and-eras.md)** | The `0.0003 ETH` start, +25%/era, the 8-era ladder, total, difficulty coupling |
+| **[Price & eras](price-and-eras.md)** | The `0.00037 ETH` start, +25%/era, the 8-era ladder, total, difficulty coupling |
 | **[Packs](packs.md)** | Sizes 5/10/25/50/100, discounts, pity, public odds |
 | **[Staking & rewards](staking-and-rewards.md)** | 6 tiers, weights, the reward accumulator, batches, fighting while staked |
 | **[Merge & forging](merge-and-forging.md)** | 2 → 1 evolution, fee, the 7% "dud" |

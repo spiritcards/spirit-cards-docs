@@ -7,7 +7,7 @@
 
 ## 哈希的构造
 
-合约 `ProofOfCard` 校验的哈希是： `[proven]`
+合约 `SpiritCards` 校验的哈希是： `[proven]`
 
 ```solidity
 bytes32 work = keccak256(
@@ -20,7 +20,7 @@ bytes32 work = keccak256(
 | 部分 | 类型 | 作用 |
 |---|---|---|
 | `chainId` | uint | 把哈希绑定到具体网络（防止跨链重放） |
-| `address(core)` | address | 把哈希绑定到 `ProofOfCard` 合约本身 |
+| `address(core)` | address | 把哈希绑定到 `SpiritCards` 合约本身 |
 | `miner` | address | 把哈希绑定到**你的钱包**（不能代他人挖） |
 | `nonce` | uint | 你要搜索的自由变量 |
 

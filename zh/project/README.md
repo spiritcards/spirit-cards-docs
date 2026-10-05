@@ -7,16 +7,16 @@
 
 ## 这是什么项目
 
-**Spirit Cards**（链上名 `Proof of Card`，代号 `POC`）是一款部署在 **Robinhood Chain** 上的
+**Spirit Cards**（代币符号 `SPC`；链上 `name() = "Spirit Cards"`，`symbol() = "SPC"`）是一款部署在 **Robinhood Chain** 上的
 链上收藏 / 对战游戏。卡牌靠 **PoW 挖矿**获得，稀有度与数值由链上种子确定性推导，玩法包含
 熔炼、对战、质押与积分。
 
 | 维度 | 说明 |
 |---|---|
-| 网络 | Robinhood Chain（Arbitrum Orbit L2），主网 `4663` / 测试网 `46630`，Gas = ETH |
-| 核心合约 | `Config`、`ProofOfCard`、`ChipToken`、`StakeVault`、`Battle`、`Points`、`Packs` |
+| 网络 | Robinhood Chain（Arbitrum Orbit L2）；当前部署在测试网 `46630`（t8 演练），主网 `4663` 为目标，Gas = ETH |
+| 核心合约 | `Config`、`SpiritCards`、`ChipToken`、`StakeVault`、`Battle`、`Points`、`Packs` |
 | 总量 | 8888 张（`maxSupply`） |
-| 所有权 | 多签 Safe 2-of-3（测试网 `Config` 所有者暂为 deployer，移交为单独步骤） |
+| 所有权 | 多签 Safe 2-of-3（`Config` 所有者暂为 deployer，移交为单独步骤） |
 | 代币 | 没有 ERC-20；卡牌是 ERC-721，筹码是 ERC-1155 |
 
 ---
@@ -25,7 +25,7 @@
 
 | 页面 | 内容 |
 |---|---|
-| [合约与地址](contracts-and-addresses.md) | 合约清单、测试网 t7 地址、已核对关联 |
+| [合约与地址](contracts-and-addresses.md) | 合约清单、已部署地址、已核对关联 |
 | [安全与所有权](security-and-ownership.md) | 安全模型、所有权移交、审计状态 |
 | [官方链接](official-links.md) | 网站、X、Telegram、GitHub |
 | [常见问题 FAQ](faq.md) | 高频疑问速答 |

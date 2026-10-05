@@ -5,8 +5,9 @@ addresses, the security and ownership model, official links, answers to common q
 a page specifically for AI agents, a glossary, and the legal disclaimer.
 
 > [!NOTE]
-> Spirit Cards is deployed on **Robinhood Chain** (Arbitrum Orbit L2). Testnet is live; mainnet,
-> a formal audit, and the handover of ownership to a Safe multisig are **separate, planned steps**.
+> Spirit Cards currently runs as a **testnet rehearsal (t8, `chainId 46630`)** on Robinhood Chain
+> (Arbitrum Orbit L2); the **mainnet `4663`** deployment (**t9**) is pending. A formal audit and the
+> handover of `Config` ownership to a Safe multisig are **separate, planned steps**.
 
 ---
 
@@ -14,7 +15,7 @@ a page specifically for AI agents, a glossary, and the legal disclaimer.
 
 | Page | What it covers |
 |---|---|
-| **[Contracts & addresses](contracts-and-addresses.md)** | The 7 contracts, their roles, the testnet deployment, chain params |
+| **[Contracts & addresses](contracts-and-addresses.md)** | The 7 contracts, their roles, the deployment, chain params |
 | **[Security & ownership](security-and-ownership.md)** | Access control, ownership handover, audit status, safeguards |
 | **[Official links](official-links.md)** | Website, brand domain, X, Telegram, GitHub |
 | **[FAQ](faq.md)** | Common questions, answered plainly |
@@ -27,9 +28,9 @@ a page specifically for AI agents, a glossary, and the legal disclaimer.
 
 ## Project shape
 
-- **Contracts** (Foundry): `Config`, `ProofOfCard`, `ChipToken` (ERC-1155), `StakeVault`, `Battle`,
+- **Contracts** (Foundry): `Config`, `SpiritCards`, `ChipToken` (ERC-1155), `StakeVault`, `Battle`,
   `Points`, `Packs`. `[proven]`
-- **Web app** (Next.js 15): Collection · Mine · Merge · Stake · Battle · Points · Docs · Pool · Profile.
+- **Web app** (Next.js 15): Collection · Mine · Stake · Battle · Merge · Points · Docs (+ Pool & Profile).
   `[proven]`
 - **Miner**: an in-browser PoW engine (auto-mining in the background) and a CLI miner for farms.
   `[proven]`
@@ -40,10 +41,10 @@ a page specifically for AI agents, a glossary, and the legal disclaimer.
 ## Repository layout (high level)
 
 ```
-contracts/        Foundry project: src/{Config,ProofOfCard,ChipToken,
+contracts/        Foundry project: src/{Config,SpiritCards,ChipToken,
                   StakeVault,Battle,Points,Packs,ReentrancyGuard}.sol
                   + test/ (suite) + script/{Deploy,PumpPool}.s.sol
-webapp/           Next.js 15 site (production on Vercel), RH testnet
+webapp/           Next.js 15 site (production at spiritcards.fun), Robinhood Chain
 miner/            CLI PoW miner + phone hash-rate benchmark
 ops/              ADDRESSES.md (source of truth), chain notes
 gitbook/          documentation (this book, EN under gitbook/en/)
@@ -57,13 +58,13 @@ gitbook/          documentation (this book, EN under gitbook/en/)
 
 | Area | Status |
 |---|---|
-| Contracts (Foundry) | Deployed on testnet; test suite green `[proven]` |
-| Web app | Production on Vercel (testnet) `[proven]` |
+| Contracts (Foundry) | Deployed; test suite green (**418/418**) `[proven]` |
+| Web app | Production; primary site `spiritcards.fun` `[proven]` |
 | CLI miner | Working `[proven]` |
-| Testnet stack (t7) | Live `[proven]` |
-| Mainnet | Planned `[planned]` |
+| Deployment (**t8**) | Live rehearsal on **testnet** `chainId 46630` (2026-10-04) `[proven]` |
+| Mainnet | Not deployed yet; **t9** pending; mainnet addresses not published `[planned]` |
 | Formal audit | Planned; internal audit found no critical/high steal/free-mint issues `[proven]` |
-| Ownership handover to Safe 2-of-3 | Planned (testnet Safe exists) `[proven]` |
+| Ownership handover to Safe 2-of-3 | Planned (Safe exists) `[proven]` |
 
 ---
 

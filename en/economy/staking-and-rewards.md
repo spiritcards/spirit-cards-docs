@@ -62,14 +62,14 @@ Key properties:
 
 The vault is fed through `notifyRewards()`. Two paths feed it: `[proven]`
 
-1. **Revenue-split pool (60%).** Mint/merge/pack fees route 60% into `ProofOfCard.accruedPool`. A
+1. **Revenue-split pool (60%).** Mint/merge/pack fees route 60% into `SpiritCards.accruedPool`. A
    **permissionless** function `pumpPool()` (callable by anyone — a keeper, the UI, or you) pushes the
    accrued pool into the vault as dividends.
 2. **PvP rake share.** Of each duel's rake, **30%** goes to the staker pool (see
    [Lives, stakes & rake](../battle/lives-stakes-and-rake.md)).
 
 ```solidity
-// ProofOfCard.sol
+// SpiritCards.sol
 function pumpPool() external nonReentrant {
     uint256 v = accruedPool;
     require(v > 0, "NOTHING");

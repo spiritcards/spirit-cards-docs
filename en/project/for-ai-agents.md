@@ -1,8 +1,8 @@
 # For AI agents
 
 A **machine-readable** summary of Spirit Cards mechanics, intended for agents, indexers, and
-bot developers. Values are the **testnet (t7) defaults** unless noted. All formulas are as implemented
-in the contracts.
+bot developers. Values are the **current (t8, testnet `46630`) defaults** unless noted. All formulas are
+as implemented in the contracts.
 
 > [!IMPORTANT]
 > This is a **game**. No yield is promised. Points have **no monetary value**. Do not present any of
@@ -17,6 +17,7 @@ in the contracts.
   "chain": "Robinhood Chain (Arbitrum Orbit L2)",
   "mainnet_chainId": 4663,
   "testnet_chainId": 46630,
+  "current_deployment": "t8 (testnet 46630, 2026-10-04)",
   "gas_token": "ETH",
   "block_time_ms": [100, 250],
   "rpc_mainnet": "https://rpc.mainnet.chain.robinhood.com"
@@ -27,18 +28,18 @@ in the contracts.
 
 ---
 
-## Contracts (testnet t7)
+## Contracts (t8)
 
 ```json
 {
   "safe_2of3":   "0x7AC43F96021C50dC057F2F5f6fc5bAa02D4aD912",
-  "Config":      "0x4ac4f6850D7b25688636d1A2a903721cDE8Ef72d",
-  "ChipToken":   "0x7b8cbA0FA17b8d5982B6e33EB4d31fb5115527c7",
-  "ProofOfCard": "0xeD628d2c353cB2071DD243E067C94516F38572d9",
-  "StakeVault":  "0xf41AcCFcC3A1A3225133F9C261b76Ca4a7651B54",
-  "Battle":      "0xAe8bDD77F59d3684A25Eb21ab2dAe980aa1710Bb",
-  "Points":      "0x6327Ed72071B223f786Cc5BF053516F667F97119",
-  "Packs":       "0x521eE1759F1842Cd81962c068Ec5e9eB708FDf2A"
+  "Config":      "0x09a24a40210BCed6e62794862175390c229Aa9b1",
+  "ChipToken":   "0x596FA37213781f08fD33ad5c0B7A79684852Ed01",
+  "SpiritCards": "0xAb4cCECaC61Be7bEc6389FF3A215E804E1A1cD46",
+  "StakeVault":  "0x877E2df6691bCb1f4EECf999444B08711c89e0f8",
+  "Battle":      "0x72382D2e24bbEB1F89DcCF4aB8F094a7b56f54e6",
+  "Points":      "0x302Af8502FCa4123A715b91D3f913EAa240eFe49",
+  "Packs":       "0x3FDF852F2E0a0c3E934Bd03A00392f657ceb9Bb0"
 }
 ```
 
@@ -55,7 +56,7 @@ in the contracts.
   "mineCooldown": 45,
   "epochCap": 1000,
   "epochLength": 3600,
-  "eraPrice_wei": "300000000000000",
+  "eraPrice_wei": "370000000000000",
   "priceStepBps": 2500,
   "eraSize": 1111,
   "chipDiscountBps": 3000,
@@ -85,7 +86,7 @@ in the contracts.
 ### Mining
 
 ```
-work = keccak256(abi.encodePacked(chainId, ProofOfCard, miner, nonce))
+work = keccak256(abi.encodePacked(chainId, SpiritCards, miner, nonce))
 valid ⇔ leadingZeroBits(work) >= requiredBits()
 requiredBits = baseBits + floor(era * bitsStepX100 / 100); era = paidMinted / eraSize
 seed = keccak256(abi.encodePacked(block.prevrandao, miner, nonce, id))
@@ -101,7 +102,7 @@ era = paidMinted / eraSize
 price(era) = eraPrice * (1 + priceStepBps/10000)^era   // eraPrice * 1.25^era
 ```
 
-Ladder (ETH): `0.0003, 0.000375, 0.00046875, 0.0005859375, 0.000732421875, 0.00091552734375, 0.0011444091796875, 0.001430511474609375`. Total ≈ **6.61 ETH**. `[proven]`
+Ladder (ETH): `0.00037, 0.0004625, 0.000578125, 0.00072265625, 0.0009033203125, 0.001129150390625, 0.00141143798828125, 0.0017642974853515625`. Total ≈ **8.16 ETH**. `[proven]`
 
 ### Card profile (from seed)
 
@@ -199,8 +200,11 @@ inside referral fund:
 ```
 size        = [5, 10, 25, 50, 100]
 discountBps = [300, 600, 1200, 2000, 3000]
-priceFor(i) = currentPrice()*size[i] - base*discountBps[i]/10000
-buyPack(i) -> poc.mintPack(buyer, size[i]); revenue via collectRevenue -> split
+packPriceBps = 20000                        // ×2 vs currentPrice()
+unit = currentPrice() * packPriceBps / 10000
+base = unit * size[i]
+priceFor(i) = base - base*discountBps[i]/10000
+buyPack(i) -> spc.mintPack(buyer, size[i]); revenue via collectRevenue -> split
 pack seeds: keccak256(block.prevrandao, buyer, id, index)
 ```
 
@@ -259,6 +263,49 @@ Config.pvpRakeBps() Config.rakeToPoolBps() Config.typeAdvBps() Config.atkVarianc
 Config.baseBits() Config.bitsStepX100() Config.mineCooldown() Config.epochCap() Config.epochLength()
 Config.eraPrice() Config.priceStepBps() Config.eraSize() Config.chipDiscountBps()
 Config.mergeFee() Config.mergeFailBps() Config.treasury()
+```
+
+`[proven]`
+
+---
+
+## MCP (Model Context Protocol)
+
+A **read-only** MCP server is exposed over **Streamable HTTP** (stateless), so LLM clients
+(Claude Desktop, Cursor, …) can query live project data directly. It is **anonymous**: no API
+keys, no accounts, no wallet, and no writes.
+
+Endpoint: `POST /api/mcp`
+
+### Tools
+
+| Tool | Returns |
+|---|---|
+| `get_project_info` | What the game is: the loop, chain, links, collection/economy basics, and how to start. |
+| `get_collection_stats` | Collection-wide totals: supply, mint price, difficulty, cooldown, counters, paused flag. |
+| `get_card` | Full profile of one token by id: species, element, rarity, HP/ATK/DEF, seed. |
+| `verify_nonce` | Recomputes `work` for a `(miner, nonce)` pair and reports whether it meets `requiredBits`. |
+| `get_leaderboard` | Activity-points leaderboard, top N wallets. |
+| `get_pool` | Staking-pool / dividend status: accrued pool, split shares, vault weight. |
+| `find_nonce` | Grinds a valid proof-of-work nonce for a miner address so it can mint immediately. |
+| `get_mining_guide` | Step-by-step guide to start mining, with live difficulty/price/cooldown and the exact mint call. |
+| `get_recent_activity` | Recent on-chain activity (mints / pack opens). |
+
+### Prompts
+
+| Prompt | Purpose |
+|---|---|
+| `project_overview` | Introduce Spirit Cards to a newcomer. |
+| `start_mining` | Walk a user through minting: guide + a ready-to-use nonce. |
+
+### Client config
+
+```
+// Claude Desktop / Cursor — streamable HTTP
+{ "mcpServers": { "spirit-cards": { "url": "https://<site>/api/mcp" } } }
+
+// stdio-only clients
+{ "mcpServers": { "spirit-cards": { "command": "npx", "args": ["-y", "mcp-remote", "https://<site>/api/mcp"] } } }
 ```
 
 `[proven]`

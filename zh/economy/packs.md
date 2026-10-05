@@ -21,10 +21,11 @@
 价格公式：
 
 ```
-priceFor(i) = size_i × currentPrice − discount_i
+priceFor(i) = size_i × (currentPrice × packPriceBps/10000) − discount_i
 ```
 
-也就是：卡包价 = 张数 × 当前纪元单价 − 折扣。折扣与当前价挂钩。 `[proven]`
+也就是：卡包价 = 张数 ×（当前纪元单价 × **2**）− 折扣。买包是「跳过 PoW 的便利通道」，
+所以每张卡是矿价的 **2 倍**（`packPriceBps = 20000`），体量折扣随包大小递增。 `[proven]`
 
 ---
 
@@ -56,7 +57,6 @@ priceFor(i) = size_i × currentPrice − discount_i
 
 面向中国内地市场（在适用范围内），卡包按以下约束设计： `[assumed — 产品/合规要求]`
 
-- **卡包价格 ≤ 200 RMB**（适用于中国渠道）。
 - **不向未满 18 岁者销售。**
 - **公示掉落概率**（public pull-rate）。
 - **不设「彩票式」价值差**：卡包维持**温和**的价值差，而不是「垃圾或中百万大奖」式的极端模型。
@@ -74,8 +74,9 @@ priceFor(i) = size_i × currentPrice − discount_i
 |---|---|
 | `size[5]` | 5 / 10 / 25 / 50 / 100 |
 | `discountBps[5]` | 300 / 600 / 1200 / 2000 / 3000 |
+| `packPriceBps` | 20000（×2 矿价；`setPackPriceBps` 可调，下限 ×1） |
 
-折扣可由所有者通过 `setDiscount` 调整。 `[proven]`
+折扣可由所有者通过 `setDiscount` 调整；×2 倍数通过 `Config.setPackPriceBps` 调整。 `[proven]`
 
 ---
 
@@ -92,7 +93,7 @@ priceFor(i) = size_i × currentPrice − discount_i
 - 五种尺寸：5/10/25/50/100，折扣 3%/6%/12%/20%/30%。 `[proven]`
 - 卡包一次铸 N 张卡，绕过 PoW/时段/冷却。 `[proven]`
 - 有保底计数器；概率公开。 `[proven]`
-- 面向中国渠道的卡包 ≤ 200 RMB、不售予 18 岁以下、公示概率、无彩票式价值差。 `[assumed]`
+- 面向中国渠道的卡包：不售予 18 岁以下、公示概率、无彩票式价值差。 `[assumed]`
 
 ---
 

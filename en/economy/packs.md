@@ -1,9 +1,10 @@
 # Packs (拆卡)
 
-Packs are a **convenience** way to acquire several cards in one transaction at a **discount**. A pack
-**bypasses proof-of-work** (the contract mints straight to you) and **bypasses the per-epoch cap and
-cooldown** — but it still pays the current era price (minus the pack discount) and still routes its
-revenue through the same split as a manual mint.
+Packs are a **convenience** way to acquire several cards in one transaction. A pack **bypasses
+proof-of-work** (the contract mints straight to you) and **bypasses the per-epoch cap and cooldown** —
+so the per-card price is a **premium: ×2 the current mint price** (`packPriceBps = 20000`), reduced by
+a **volume discount** that grows with pack size. Revenue still routes through the same split as a
+manual mint.
 
 > [!NOTE]
 > Buying a pack is the "I want N cards now" path. Mining is the canonical path where cards are earned
@@ -23,11 +24,13 @@ revenue through the same split as a manual mint.
 
 `[proven]`
 
-The discount is a direct percentage off `N × currentPrice()`:
+The per-card pack price is `currentPrice() × packPriceBps/10000` (default **×2** — buying skips the
+PoW work), and the volume discount applies to the whole pack:
 
 ```solidity
 function priceFor(uint256 i) public view returns (uint256) {
-    uint256 base = poc.currentPrice() * size[i];
+    uint256 unit = (spc.currentPrice() * config.packPriceBps()) / 10000; // default ×2
+    uint256 base = unit * size[i];
     return base - (base * discountBps[i]) / 10000;
 }
 ```
@@ -36,18 +39,20 @@ function priceFor(uint256 i) public view returns (uint256) {
 
 ## Pack prices at era 0
 
-At the starting era price of `0.0003 ETH`, the five packs cost (USD at ETH ≈ $3000):
+At the starting era price of `0.00037 ETH` (≈$1 per minted card), pack cards cost ×2 − volume
+discount (USD at ETH ≈ $2700):
 
-| Pack | Cards | List (ETH) | Price (ETH) | ≈ USD | Per-card (ETH) | Effective discount |
-|---|---|---|---|---|---|---|
-| 5 | 5 | 0.001500 | `0.001455` | ~$4.37 | 0.000291 | −3% |
-| 10 | 10 | 0.003000 | `0.002820` | ~$8.46 | 0.000282 | −6% |
-| 25 | 25 | 0.007500 | `0.006600` | ~$19.80 | 0.000264 | −12% |
-| 50 | 50 | 0.015000 | `0.012000` | ~$36.00 | 0.000240 | −20% |
-| 100 | 100 | 0.030000 | `0.021000` | ~$63.00 | 0.000210 | −30% |
+| Pack | Cards | Price (ETH) | ≈ USD | Per-card (USD) | vs mint price |
+|---|---|---|---|---|---|
+| 5 | 5 | `0.003589` | ~$9.7 | $1.94 | ×1.94 |
+| 10 | 10 | `0.006956` | ~$18.8 | $1.88 | ×1.88 |
+| 25 | 25 | `0.016280` | ~$44.0 | $1.76 | ×1.76 |
+| 50 | 50 | `0.029600` | ~$79.9 | $1.60 | ×1.60 |
+| 100 | 100 | `0.051800` | ~$139.9 | $1.40 | ×1.40 |
 
-`[proven]` for ETH; `[assumed]` for USD (ETH-price dependent). As the era rises, pack prices scale with
-`currentPrice()` automatically — only the discount percentage is fixed.
+`[proven]` for the formula; `[assumed]` for USD (ETH-price dependent). As the era rises, pack prices
+scale with `currentPrice()` automatically; the ×2 multiplier is a Config knob (`setPackPriceBps`,
+floor ≥ ×1) and the discount percentages are fixed per size.
 
 ---
 
@@ -56,7 +61,7 @@ At the starting era price of `0.0003 ETH`, the five packs cost (USD at ETH ≈ $
 `buyPack(i)` does: `[proven]`
 
 1. Charges `priceFor(i)` in ETH.
-2. Calls `ProofOfCard.mintPack(msg.sender, size[i])`, which mints `size[i]` cards whose seeds are
+2. Calls `SpiritCards.mintPack(msg.sender, size[i])`, which mints `size[i]` cards whose seeds are
    `keccak256(block.prevrandao, buyer, id, index)`.
 3. Routes the ETH through `collectRevenue`, applying the standard **pool 60 / referral 10 / treasury 30**
    split.
@@ -104,7 +109,6 @@ and a bigger discount. The odds are **public** and constant. `[proven]` for the 
 
 Per the project's China-market guardrails: `[assumed — policy, not code]`
 
-- Pack purchases should respect a **≤ 200 RMB** ceiling where that rule applies.
 - **No under-18** participation.
 - **Odds are disclosed** (as above).
 - **No lottery-like value dispersion** — packs give game items, not cash prizes.
@@ -120,7 +124,8 @@ See the [Legal disclaimer](../project/legal-disclaimer.md).
 packs.priceFor(i)        // price of pack i
 packs.size(i)            // cards in pack i
 packs.discountBps(i)     // discount of pack i
-poc.mintPack(to, count)  // only callable by the Packs contract
+config.packPriceBps()    // ×2 multiplier (20000 bps) — setPackPriceBps()
+spc.mintPack(to, count)  // only callable by the Packs contract
 ```
 
 `[proven]`

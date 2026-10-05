@@ -39,7 +39,8 @@ sure win**. Over time, players as a group pay the rake. Do not wager more than y
 - Smart contracts can contain **bugs or vulnerabilities**, even after review. An internal audit and a
   test suite reduce — but do not eliminate — this risk.
 - A **formal external audit** has not yet been completed at the time of writing; plan accordingly.
-- **Mainnet is not yet live.** The current deployment is **testnet** and intended for rehearsal.
+- The current deployment is a **testnet rehearsal (t8, `chainId 46630`)**; the **mainnet `4663`**
+  deployment is **pending**, and mainnet addresses are not published.
 - The owner (target: a 2-of-3 Safe) can **change parameters**, including revenue splits, and can
   **pause** the game. Review the on-chain config before acting.
 - Network, RPC, wallet, and bridge risks are outside the project's control.
@@ -69,7 +70,6 @@ sure win**. Over time, players as a group pay the rake. Do not wager more than y
 Where the project markets to or operates in China-facing communities, the following guardrails apply
 (this is **policy**, not enforced by the contract — tagged `[assumed]`):
 
-- **Pack price ceiling ≤ 200 RMB** where that rule applies.
 - **No under-18** participation.
 - **Public odds disclosure** — pack odds are documented (uniform draws from the seed).
 - **No lottery-like value dispersion** — packs yield game items, not cash prizes or random monetary
@@ -113,7 +113,7 @@ reference for how the game behaves; this book explains them but does not superse
 | Battle is zero-sum + rake (not a Ponzi) | `[proven]` |
 | Internal audit: no critical/high steal/free-mint | `[proven]` |
 | External audit | `[planned]` |
-| Mainnet live | `[planned]` (testnet live) |
+| Deployment | Testnet rehearsal live (**t8**, `chainId 46630`); mainnet `4663` **pending** `[proven]` |
 
 ---
 

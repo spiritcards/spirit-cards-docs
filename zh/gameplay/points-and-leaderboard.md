@@ -14,7 +14,7 @@
 | **STAKE**（质押） | 2 | `pointsStake` |
 | **PvP win**（对战胜利） | 3 | `pointsPvpWin` |
 
-积分由授权模块（`ProofOfCard`、`StakeVault`、`Battle`）通过 `Points` 合约发放。 `[proven]`
+积分由授权模块（`SpiritCards`、`StakeVault`、`Battle`）通过 `Points` 合约发放。 `[proven]`
 
 > [!NOTE]
 > 批量质押（`stakeBatch`）会按**卡数 × 单卡积分**发放，所以一次押多张卡不会「少给」。 `[proven]`

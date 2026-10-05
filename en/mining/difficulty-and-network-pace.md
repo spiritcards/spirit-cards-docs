@@ -8,7 +8,7 @@ difficulty ratchet** that responds to hash-rate: the game does not try to "outru
 ## The difficulty formula
 
 ```solidity
-// ProofOfCard.sol
+// SpiritCards.sol
 function requiredBits() public view returns (uint256) {
     uint256 size = config.eraSize();
     uint256 era = size == 0 ? 0 : paidMinted / size;
@@ -92,14 +92,14 @@ of letting one fast machine take every slot.
 On-chain you can read: `[proven]`
 
 ```solidity
-poc.requiredBits()   // current difficulty in bits
-poc.currentPrice()   // current mint price (ETH)
-poc.paidMinted()     // cards minted at price (drives era)
-poc.totalMinted()    // base supply minted so far
+spc.requiredBits()   // current difficulty in bits
+spc.currentPrice()   // current mint price (ETH)
+spc.paidMinted()     // cards minted at price (drives era)
+spc.totalMinted()    // base supply minted so far
 config.mineCooldown()
 config.epochCap()
 config.epochLength()
-poc.epochMinted()    // cards minted this epoch
+spc.epochMinted()    // cards minted this epoch
 ```
 
 `era = paidMinted / eraSize` is the single value that drives **both** price and difficulty.

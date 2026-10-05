@@ -4,7 +4,7 @@ Every card has one of **six skills**, taken from its seed:
 
 ```solidity
 function skillOf(uint256 card) public view returns (uint8) {
-    return uint8((uint256(poc.seedOf(card)) >> 208) % 6); // 0..5
+    return uint8((uint256(spc.seedOf(card)) >> 208) % 6); // 0..5
 }
 ```
 

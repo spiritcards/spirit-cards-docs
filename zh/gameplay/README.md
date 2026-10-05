@@ -29,7 +29,7 @@
 | 质押 STAKE | 2 | `pointsStake` |
 | PvP 胜利 | 3 | `pointsPvpWin` |
 
-积分由授权模块（`ProofOfCard`、`StakeVault`、`Battle`）通过 `Points` 合约记账。 `[proven]`
+积分由授权模块（`SpiritCards`、`StakeVault`、`Battle`）通过 `Points` 合约记账。 `[proven]`
 
 > [!NOTE]
 > 上个项目**没有**把质押计入积分，惹恼了持有者。这里做了修正：`StakeVault` 为质押发放积分

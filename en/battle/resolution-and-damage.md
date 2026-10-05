@@ -26,7 +26,7 @@ And from the environment:
 ```solidity
 function _initRng(uint256 a, uint256 b, uint256 id) internal view returns (uint256) {
     return uint256(keccak256(abi.encodePacked(
-        poc.seedOf(a), poc.seedOf(b), id, block.prevrandao, address(this)
+        spc.seedOf(a), spc.seedOf(b), id, block.prevrandao, address(this)
     )));
 }
 ```

@@ -16,8 +16,8 @@ Points are awarded **on-chain**, by the module that performs the action. Default
 
 | Action | Points | Parameter | Awarded by |
 |---|---|---|---|
-| **Mine** a card | **1** | `pointsMine` | `ProofOfCard.mine` |
-| **Merge** (successful) | **2** | `pointsMerge` | `ProofOfCard.mergeBurn` |
+| **Mine** a card | **1** | `pointsMine` | `SpiritCards.mine` |
+| **Merge** (successful) | **2** | `pointsMerge` | `SpiritCards.mergeBurn` |
 | **Stake** a card | **2** | `pointsStake` | `StakeVault.stake` / `stakeBatch` |
 | **Win** a duel | **3** | `pointsPvpWin` | `Battle._settle` |
 
@@ -50,7 +50,7 @@ contract Points {
 
 `[proven]`
 
-- Only **authorized modules** (ProofOfCard, StakeVault, Battle) — or the owner — can add points.
+- Only **authorized modules** (SpiritCards, StakeVault, Battle) — or the owner — can add points.
 - Each award emits `PointsAdded(user, amount, reason)` with a reason tag such as `MINE`, `MERGE`,
   `STAKE`, `PVP_WIN`.
 - The leaderboard is simply the `points[address]` mapping, **readable on-chain**. `[proven]`

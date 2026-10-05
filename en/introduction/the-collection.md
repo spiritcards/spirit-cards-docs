@@ -81,7 +81,7 @@ Because every stat comes from `seedOf(card)`, this is fully reproducible:
 
 ```solidity
 // Simplified from Battle.sol
-uint256 s = uint256(poc.seedOf(card));
+uint256 s = uint256(spc.seedOf(card));
 uint256 rarity  = (s >> 248) % 6;              // 0..5
 uint256 atk     = 8  + ((s >> 240) & 0xFF) % 20 + rarity * 4;
 uint256 def     = 4  + ((s >> 232) & 0xFF) % 16 + rarity * 3;

@@ -22,7 +22,7 @@ transaction. You can also buy a **pack** (which skips the PoW for convenience, a
 
 ### How much does a card cost?
 
-The mint price **starts at `0.0003 ETH`** (≈ $1 at ETH ≈ $3000) and rises **+25% each era** (era = 1111
+The mint price **starts at `0.00037 ETH`** (≈ $1 at ETH ≈ $3000) and rises **+25% each era** (era = 1111
 cards), for **8 eras**. See the [price ladder](../economy/price-and-eras.md).
 
 ### What is a "chip"?
@@ -111,21 +111,24 @@ On-chain **activity points** (mine 1, merge 2, stake 2, PvP win 3). They feed a 
 
 ### What chain is this?
 
-**Robinhood Chain** (Arbitrum Orbit L2), mainnet `4663` / testnet `46630`, gas in ETH. `[proven]`
+**Robinhood Chain** (Arbitrum Orbit L2), chainId `4663`, gas in ETH. `[proven]`
 
 ### Is it audited?
 
-An **internal** audit found no critical/high steal/free-mint issues, and the test suite passes. A
-**formal external audit** and the **mainnet Safe handover** are planned. See
+An **internal** audit found no critical/high steal/free-mint issues, and the test suite passes
+(**418/418**). A
+**formal external audit** and the **Safe handover** are planned. See
 [Security & ownership](security-and-ownership.md).
 
-### Is it live on mainnet?
+### Is it deployed to mainnet yet?
 
-Not yet. The **testnet** stack (t7) is live; mainnet is **planned**. `[proven]`
+Not yet. The **t8** rehearsal is live on the Robinhood Chain **testnet** (`chainId 46630`); the
+**mainnet `4663`** deployment (**t9**) is **pending**, and **mainnet addresses are not published**.
+`[proven]`
 
 ### Is it safe to use?
 
-It is a game on testnet with real mechanics. Only use funds you can afford to lose. Never share your
+It is a live game on Robinhood Chain with real mechanics. Only use funds you can afford to lose. Never share your
 seed phrase. See the [Legal disclaimer](legal-disclaimer.md).
 
 ### Who runs it?

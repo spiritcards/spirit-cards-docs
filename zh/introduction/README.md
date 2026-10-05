@@ -1,6 +1,6 @@
 # 简介
 
-**Spirit Cards**（链上名 `Proof of Card`，代号 `POC`）是一款围绕「灵兽卡牌」构建的链上游戏。
+**Spirit Cards**（代币符号 `SPC`）是一款围绕「灵兽卡牌」构建的链上游戏。
 它的核心不是「买一张图」，而是「**挖出一只生物**」：卡牌是真正的 PoW 挖矿产出的，
 稀有度和战斗数值从链上种子确定性推导，任何人都能复算。
 
@@ -47,8 +47,8 @@
 
 ## 为什么是 Robinhood Chain
 
-项目部署在 **Robinhood Chain**（Arbitrum Orbit L2）：Gas 用 **ETH**，主网 `chainId 4663`，
-测试网 `46630`，出块约 100–250 ms。选择它的原因是**低 Gas、原生支持 OpenSea 二级市场、
+项目部署在 **Robinhood Chain**（Arbitrum Orbit L2）：Gas 用 **ETH**，当前线上部署在测试网 `chainId 46630`（主网 `4663` 为目标），
+出块约 100–250 ms。选择它的原因是**低 Gas、原生支持 OpenSea 二级市场、
 开箱即用的账户抽象（ERC-4337）**，以及 Robinhood 品牌带来的认知度。 `[assumed]`
 
 > [!NOTE]
@@ -61,8 +61,8 @@
 
 | 部分 | 内容 |
 |---|---|
-| 合约（Foundry） | `Config`、`ProofOfCard`、`ChipToken`（ERC-1155）、`StakeVault`、`Battle`、`Points`、`Packs` `[proven]` |
-| 网站（Next.js） | Collection · Mine · Stake · Battle · Merge · Points · Docs 等页面 `[proven]` |
+| 合约（Foundry） | `Config`、`SpiritCards`、`ChipToken`（ERC-1155）、`StakeVault`、`Battle`、`Points`、`Packs` `[proven]` |
+| 网站（Next.js） | Collection · Mine · Stake · Battle · Merge · Points · Docs，另有 Pool · Profile 等页面 `[proven]` |
 | 挖矿器 | 浏览器 PoW 引擎（后台自动挖）+ CLI 挖矿器（矿场） `[proven]` |
 | 美术 | 16 个物种（8 通用 + 8 龙），由种子确定性渲染 `[proven]` |
 

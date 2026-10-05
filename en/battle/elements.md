@@ -4,7 +4,7 @@ Every card has one of **four elements**, taken from two bits of its seed:
 
 ```solidity
 function elementOf(uint256 card) public view returns (uint8) {
-    return uint8((uint256(poc.seedOf(card)) >> 216) & 0x03); // 0..3
+    return uint8((uint256(spc.seedOf(card)) >> 216) & 0x03); // 0..3
 }
 ```
 

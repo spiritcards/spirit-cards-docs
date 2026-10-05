@@ -128,14 +128,14 @@ So this card reads: **SR · Ember · Precision · 153 HP · 27 ATK · 18 DEF.**
 
 > [!NOTE]
 > The seed above is a constructed illustration, not a real minted card. On-chain you read the real
-> seed with `poc.seedOf(id)` and run the same arithmetic.
+> seed with `spc.seedOf(id)` and run the same arithmetic.
 
 ---
 
 ## Reading a card on-chain
 
 ```solidity
-// ProofOfCard.sol
+// SpiritCards.sol
 mapping(uint256 => bytes32) public seedOf;         // the card's seed
 // Battle.sol
 function profileOf(uint256 card)

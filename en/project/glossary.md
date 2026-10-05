@@ -8,8 +8,8 @@ Key terms in **English / Русский / 中文**.
 
 | English | Русский | 中文 | Meaning |
 |---|---|---|---|
-| **Spirit Cards** | Spirit Cards | Spirit Cards | The game / collection; on-chain name Proof of Card |
-| **Proof of Card (POC)** | Proof of Card (POC) | Proof of Card (POC) | The on-chain collection name and ticker |
+| **Spirit Cards** | Spirit Cards | Spirit Cards | The game / collection and its on-chain name |
+| **SPC** | SPC | SPC | On-chain ticker (`symbol()` = SPC) for the collection |
 | **Card** | Карта | 卡牌 | A collectible creature NFT (ERC-721) |
 | **Seed** | Сид / семя | 种子 | 32-byte on-chain value all traits derive from |
 | **Mine** | Майнить / 挖 | 挖矿 | Produce a card via proof-of-work |
@@ -50,7 +50,7 @@ Key terms in **English / Русский / 中文**.
 | English | Русский | 中文 | Meaning |
 |---|---|---|---|
 | **Era** | Эра | 阶段 | 1111 cards; price +25% and difficulty +0.33 bit per era |
-| **Price** | Цена | 价格 | Mint price; starts 0.0003 ETH, +25%/era |
+| **Price** | Цена | 价格 | Mint price; starts 0.00037 ETH, +25%/era |
 | **Chip** | Фишка | 筹码 | ERC-1155 coupon (−30% on next mint) |
 | **Pack** | Пак | 卡包 | Bundle of 5/10/25/50/100 cards at a discount |
 | **Pool** | Пул | 奖池 | Staker reward pool (fee-funded) |

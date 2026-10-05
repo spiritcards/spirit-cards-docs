@@ -29,7 +29,7 @@
 
 | 项目 | 数值 | 说明 |
 |---|---|---|
-| 铸造价 | 当前 `eraPrice` | 起始 0.0003 ETH，每纪元 +25% |
+| 铸造价 | 当前 `eraPrice` | 起始 0.00037 ETH，每纪元 +25% |
 | 筹码折扣 | −30% | 若使用筹码（`chipDiscountBps = 3000`） |
 | Gas | 很低 | Robinhood Chain 的 Gas 成本 `[assumed]` |
 

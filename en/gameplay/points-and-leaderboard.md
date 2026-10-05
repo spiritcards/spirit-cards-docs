@@ -58,7 +58,7 @@ function addPoints(address user, uint256 amount, bytes32 reason) external {
 
 | Module | Awards | Via |
 |---|---|---|
-| `ProofOfCard` | mine, merge | `points.addPoints(...)` in `mine` / `mergeBurn` |
+| `SpiritCards` | mine, merge | `points.addPoints(...)` in `mine` / `mergeBurn` |
 | `StakeVault` | stake | `points.addPoints(...)` in `stake` / `stakeBatch` |
 | `Battle` | PvP win | `points.addPoints(winner, pointsPvpWin, "PVP_WIN")` |
 

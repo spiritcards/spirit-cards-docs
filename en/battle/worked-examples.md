@@ -215,8 +215,8 @@ default `atkVarianceBps = 4000`.
 
 ```solidity
 // 1. Read the seeds and the fight's prevrandao
-bytes32 sA = poc.seedOf(cardA);
-bytes32 sB = poc.seedOf(cardB);
+bytes32 sA = spc.seedOf(cardA);
+bytes32 sB = spc.seedOf(cardB);
 
 // 2. Profile both cards
 (uint256 hpA, uint256 atkA, uint256 defA,, uint8 elA, uint8 skA) = battle.profileOf(cardA);

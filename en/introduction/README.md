@@ -1,6 +1,6 @@
 # Introduction
 
-Spirit Cards (on-chain name **Proof of Card / POC**) is a collectible creature-card game where the
+Spirit Cards (on-chain name **`SpiritCards`**, ticker **`SPC`**) is a collectible creature-card game where the
 cards are **mined**, not sold from a shop at a fixed price. Your device searches for a number
 (a `nonce`) that produces a hash with enough leading zero bits — a real proof-of-work, the same idea
 as Bitcoin's, but tuned to run in seconds for cents of gas. Each card then carries an element,

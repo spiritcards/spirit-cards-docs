@@ -5,7 +5,7 @@ and the current audit status.
 
 > [!IMPORTANT]
 > Security is a **process**, not a badge. The contracts are deployed and function; a **formal external
-> audit** and the **mainnet ownership handover to a Safe multisig** are planned, separate steps.
+> audit** and the **ownership handover to a Safe multisig** are planned, separate steps.
 
 ---
 
@@ -13,10 +13,10 @@ and the current audit status.
 
 | Contract | Owner / admin |
 |---|---|
-| `Config` | `owner` (deployer on testnet; **target: Safe 2-of-3**) |
-| `ChipToken` | **Safe** (testnet Safe exists) `[proven]` |
+| `Config` | `owner` (deployer; **target: Safe 2-of-3**) |
+| `ChipToken` | **Safe** (Safe exists) `[proven]` |
 | `Points` | `Config.owner()` — **dynamic**, follows `Config` `[proven]` |
-| `ProofOfCard`, `StakeVault`, `Battle`, `Packs` | gate admin calls on `config.owner()` `[proven]` |
+| `SpiritCards`, `StakeVault`, `Battle`, `Packs` | gate admin calls on `config.owner()` `[proven]` |
 
 The design principle: **one ownership knob** (`Config.owner`) governs the whole system. Most modules ask
 `config.owner()` for authorization rather than storing their own owner. So a single handover of `Config`
@@ -32,22 +32,21 @@ function acceptOwnership() external;                     // nominee accepts
 `[proven]`
 
 > [!NOTE]
-> **Current testnet state:** `Config.owner` = deployer (a rehearsal simplification). `ChipToken.owner` =
-> Safe. Handing `Config` to the Safe is a **planned** step (the Safe contract already exists on
-> testnet). `[proven]`
+> **Current state:** `Config.owner` = deployer (a rehearsal simplification). `ChipToken.owner` =
+> Safe. Handing `Config` to the Safe is a **planned** step (the Safe contract already exists). `[proven]`
 
 ---
 
 ## The Safe (2-of-3)
 
-Testnet Safe: `0x7AC43F96021C50dC057F2F5f6fc5bAa02D4aD912`. `[proven]`
+Safe: `0x7AC43F96021C50dC057F2F5f6fc5bAa02D4aD912`. `[proven]`
 
 - **2-of-3 multisig:** any admin action needs two of three signers.
 - `Config.treasury()` = Safe (treasury funds land in the multisig).
 - `ChipToken.owner` = Safe.
 - **Target:** `Config` ownership → Safe, so parameter changes require multisig approval.
 
-The mainnet Safe is created later with the same procedure (`--chain mainnet`). `[planned]`
+The ownership handover to the Safe follows the same procedure (`--chain mainnet`). `[planned]`
 
 ---
 
@@ -55,9 +54,9 @@ The mainnet Safe is created later with the same procedure (`--chain mainnet`). `
 
 | Guard | Where | Effect |
 |---|---|---|
-| `onlyOwner` / `onlyConfigOwner` | `Config`, `ProofOfCard`, `Packs` | Parameter & fund administration |
+| `onlyOwner` / `onlyConfigOwner` | `Config`, `SpiritCards`, `Packs` | Parameter & fund administration |
 | `msg.sender == config.owner()` | `Battle.setPointsContract`, `setVault`, `setMasterRef`, `StakeVault.setBattle` | Wiring modules |
-| `onlyMinter` | `ChipToken` | Only `ProofOfCard` mints/burns chips |
+| `onlyMinter` | `ChipToken` | Only `SpiritCards` mints/burns chips |
 | `onlyBattle` | `StakeVault` | Only `Battle` locks/unlocks/kills staked cards |
 | `authorized[module]` | `Points` | Only wired modules award points |
 
@@ -89,13 +88,13 @@ The contracts include several deliberate protections: `[proven]`
 ## Audit status
 
 - **Internal audit `[proven]`:** found **no critical or high** "steal funds" or "free-mint" issues.
-- **Test suite `[proven]`:** a Foundry suite (hundreds of tests, including invariant/fuzz tests for the
-  vault solvency) passes.
-- **Formal external audit `[planned]`:** a separate step before mainnet.
+- **Test suite `[proven]`:** a Foundry suite — **418/418** tests passing, including invariant/fuzz tests
+  for the vault solvency.
+- **Formal external audit `[planned]`:** a separate step.
 
 > [!NOTE]
 > An internal audit is **not** a guarantee. Smart contracts can still contain bugs. Only deposit what
-> you can afford to lose, and prefer testnet for experimentation.
+> you can afford to lose.
 
 ---
 
@@ -133,7 +132,7 @@ Each change emits `ConfigChanged(key, old, new)`. `[proven]`
 ## Key management
 
 - All project private keys live in **KeePass** (`Crypto/pow_cards/...`), never in the repo.
-- Mainnet and testnet keys are **separate sets**. `[proven]`
+- Deployment and personal keys are **separate sets**. `[proven]`
 - No secrets in git; no `set -x` in scripts.
 
 ---
@@ -153,9 +152,9 @@ the [Official links](official-links.md) page. For a production protocol, respons
 | Internal audit: no critical/high steal/free-mint | `[proven]` |
 | Test suite passing | `[proven]` |
 | Chip/referral/merge anti-abuse logic | `[proven]` |
-| Ownership → Safe 2-of-3 | `[planned]` (testnet Safe exists) |
+| Ownership → Safe 2-of-3 | `[planned]` (Safe exists) |
 | External audit | `[planned]` |
-| Mainnet | `[planned]` |
+| Deployment | Testnet rehearsal live (**t8**, `chainId 46630`); mainnet `4663` **pending** `[planned]` |
 
 ---
 
